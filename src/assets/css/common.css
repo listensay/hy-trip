@@ -1,3 +1,7 @@
+:root {
+  --parmary-color: #ff9854
+}
+
 body {
   font-family: PingFangSC-Regular, Helvetica Neue, sans-serif;
   font-size: 14px;

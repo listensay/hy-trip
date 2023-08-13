@@ -1,12 +1,14 @@
 <script setup>
-
+import tabbar from "./components/tab-bar/tabbar.vue"
 </script>
 
 <template>
   <div class="app">
-    App Vue
+    <router-view></router-view>
+    <tabbar></tabbar>
   </div>
 </template>
 
-<style scoped>
+<style lang="less" scoped>
+
 </style>
