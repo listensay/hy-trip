@@ -1,5 +1,6 @@
 :root {
-  --parmary-color: #ff9854
+  --parmary-color: #ff9854;
+  --van-search-left-icon-color: var(--parmary-color) !important;
 }
 
 body {
