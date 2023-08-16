@@ -5,3 +5,9 @@ export const getHomeHotTags = () => {
     url: '/home/hotSuggests'
   })
 }
+
+export const getHomeCategories = () => {
+  return Request.get({
+    url: '/home/categories'
+  })
+}

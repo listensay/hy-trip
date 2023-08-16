@@ -59,6 +59,7 @@ const itemClick = item => {
       margin: 2.6667vw;
       background-color: #fff4ec;
       font-size: 3.2vw;
+      border-radius: 3.7333vw;
     }
   }
 }

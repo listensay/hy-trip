@@ -3,6 +3,7 @@ import { useRouter } from "vue-router"
 import { ref, toRef } from "vue"
 import useCityStore from "@/stores/modules/city"
 import { formatMonthDay, getDiffDays } from '@/utils/format_date'
+import useHomeStore from '@/stores/modules/home'
 const router = useRouter()
 
 const getLaction = () => {
@@ -36,6 +37,20 @@ const onConfirm = value => {
   stayDate.value = getDiffDays(value[0], value[1])
   showCalendar.value = false
 }
+
+const homeStore = useHomeStore()
+homeStore.fetchHomeHotTags()
+const searchClick = () => {
+  router.push({
+    path: '/search',
+    query: {
+      startDate: startDate.value,
+      endDate: endDate.value,
+      currentCity: cityStore.currentCity.cityName
+    }
+  })
+}
+
 </script>
 
 <template>
@@ -61,7 +76,14 @@ const onConfirm = value => {
     </div>
     <div class="item keyword">关键字/位置/民宿名</div>
     <van-calendar :round="false" color="#ff9854" v-model:show="showCalendar" type="range" @confirm="onConfirm" />
-
+    <div class="suggests">
+      <template v-for="(item, index) in homeStore.hotSuggests" :key="index">
+        <div class="tag" :style=" { color: item.tagText.color, background: item.tagText.background.color } ">{{ item.tagText.text }}</div>
+      </template>
+    </div>
+    <div class="search-button">
+      <van-button type="primary" color="linear-gradient(90deg, #fa8c1d, #fcaf3f)" @click="searchClick" round block>开始搜索</van-button>
+    </div>
   </div>
 </template>
 
@@ -121,6 +143,21 @@ const onConfirm = value => {
   .keyword {
     padding: 4vw 8vw;
     color: #999;
+  }
+  .suggests {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2.6667vw 5vw;
+    .tag {
+      margin: .5333vw 1.3333vw;
+      font-size: 3.2vw;
+      padding: 1.0667vw 1.6vw;
+      border-radius: 3.2vw;
+    }
+  }
+
+  .search-button {
+    padding: 2.6667vw 5vw;
   }
 }
 

@@ -37,7 +37,6 @@ const tabActive = ref('')
 
 <style lang="less" scoped>
 .city {
-  background-color: #fff;
   --van-tabs-line-height: 13.3333vw;
   .content {
     height: calc(100vh - 104px);
