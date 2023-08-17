@@ -22,7 +22,7 @@ const value = ref('')
     </div>
     <SearchBox></SearchBox>
     <CategoryTab></CategoryTab>
-    <van-search v-show="showSearchBar" v-model="value" placeholder="请输入搜索关键词" />
+    <van-search v-show="showSearchBar" v-model="value" placeholder="关键词/位置/民宿" />
     <Content></Content>
   </div>
 </template>

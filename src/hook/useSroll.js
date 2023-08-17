@@ -1,4 +1,6 @@
 import { ref, onMounted, onUnmounted } from "vue"
+// 防抖 / 节流
+import { throttle } from "underscore"
 
 export default function useScroll() {
   // 是否滚到底
@@ -7,7 +9,7 @@ export default function useScroll() {
   const scrollTop = ref(0)
   const scrollClientHeight = ref(0)
 
-  const scrollListenerHandler = () => {
+  const scrollListenerHandler = throttle(() => {
     // 页面整体高度
     pageHeight.value = document.documentElement.scrollHeight
     // 相对的页面整体高度
@@ -18,7 +20,7 @@ export default function useScroll() {
     if (scrollClientHeight.value + scrollTop.value >= pageHeight.value) {
       scrollState.value = true
     }
-  }
+  }, 100)
 
   // 组件加载完成监听
   onMounted(() => {
