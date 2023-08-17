@@ -11,3 +11,9 @@ export const getHomeCategories = () => {
     url: '/home/categories'
   })
 }
+
+export const getHomeHouseList = (page = 1) => {
+  return Request.get({
+    url: `/home/houselist/?page=${page}`
+  })
+}
