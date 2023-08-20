@@ -1,9 +1,11 @@
 <script setup>
 import { useRouter } from "vue-router"
-import { ref, toRef } from "vue"
+import { computed, ref, toRef } from "vue"
 import useCityStore from "@/stores/modules/city"
 import { formatMonthDay, getDiffDays } from '@/utils/format_date'
 import useHomeStore from '@/stores/modules/home'
+import useMainStore from "@/stores/main"
+import { storeToRefs } from "pinia"
 const router = useRouter()
 
 const getLaction = () => {
@@ -19,20 +21,19 @@ const cityClick = () => {
 }
 // 获取城市名字
 const cityStore = useCityStore()
-
-// 获取日期
-const nowDate = new Date()
-const newDate = new Date().setDate(nowDate.getDate() + 1)
-const startDate = ref(formatMonthDay(nowDate))
-const endDate = ref(formatMonthDay(newDate))
-const stayDate = ref(getDiffDays(nowDate, newDate))
+const mainStore = useMainStore()
+const { startDate, endDate } = storeToRefs(mainStore)
+console.log( startDate.value, endDate.value)
+const startDateStr = computed(() => formatMonthDay(startDate.value))
+const endDateStr = computed(() => formatMonthDay(endDate.value))
+const stayDate = ref(getDiffDays(startDate.value, endDate.value))
 
 // 日历显示
 const showCalendar = ref(false)
 // 日历组件 点击确认的时候
 const onConfirm = value => {
-  startDate.value = formatMonthDay(value[0])
-  endDate.value = formatMonthDay(value[1])
+  startDate.value = value[0]
+  endDate.value = value[1]
 
   stayDate.value = getDiffDays(value[0], value[1])
   showCalendar.value = false
@@ -62,12 +63,12 @@ const searchClick = () => {
     <div class="item stay-date" @click="showCalendar = true">
       <div class="start">
         <div class="tip">入住</div>
-        <div class="date">{{ startDate }}</div>
+        <div class="date">{{ startDateStr }}</div>
       </div>
       <div class="stay">共 {{ stayDate }} 晚</div>
       <div class="end">
         <div class="tip">离店</div>
-        <div class="date">{{ endDate }}</div>
+        <div class="date">{{ endDateStr }}</div>
       </div>
     </div>
     <div class="item specification">
@@ -160,5 +161,6 @@ const searchClick = () => {
     padding: 2.6667vw 5vw;
   }
 }
+
 
 </style>
