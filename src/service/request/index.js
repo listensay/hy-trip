@@ -1,13 +1,34 @@
 import axios from "axios";
-
 import { baseURL, TIMEOUT } from "./config";
-
+import useMainStore from "@/stores/main";
+import { storeToRefs } from "pinia";
+const mainStore = useMainStore()
+const { loading } = storeToRefs(mainStore)
 class Request {
   constructor(baseURL) {
     this.instance = axios.create({
       baseURL,
       timeout: TIMEOUT,
     });
+
+    this.instance.interceptors.request.use(config => {
+      loading.value = true
+      return config
+    }, (error) => {
+      loading.value = true
+      return error
+    })
+
+    this.instance.interceptors.response.use(
+      res => {
+        loading.value = false
+        return res
+      },
+      error => {
+        loading.value = false
+        return error
+      }
+    )
   }
 
   request(config) {

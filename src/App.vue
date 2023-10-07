@@ -1,10 +1,11 @@
 <script setup>
-import tabbar from "./components/tab-bar/tabbar.vue"
+import Loading from '@/components/loading/index.vue'
 </script>
 
 <template>
   <div class="app">
     <router-view></router-view>
+    <Loading></Loading>
   </div>
 </template>
 

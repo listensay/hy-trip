@@ -6,12 +6,11 @@ endDate.setDate(startDate.getDate() + 1)
 
 const useMainStore = defineStore('main', {
   state: () => ({
-    // 住宿日期
-
     // 开始日期
     startDate: startDate,
     // 结束日期
-    endDate: endDate
+    endDate: endDate,
+    loading: false
   })
 })
 
