@@ -96,7 +96,7 @@ const searchClick = () => {
   background-color: #fff;
   .item {
     padding: 2.6667vw 8vw;
-    border-bottom: 1px solid #eee;
+    border-bottom: .2667vw solid #eee;
   }
   .location {
     display: flex;
@@ -135,10 +135,10 @@ const searchClick = () => {
     height: 10.6667vw;
 
     .pLimit {
-      border-left: 1px solid #eee;
+      border-left: .2667vw solid #eee;
       height: 100%;
       line-height: 10.6667vw;
-      padding-left: 5px;
+      padding-left: 1.3333vw;
     }
   }
   .keyword {

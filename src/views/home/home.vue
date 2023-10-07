@@ -29,7 +29,9 @@ const value = ref('')
 
 <style lang="less" scoped>
 .home {
-  --van-tabs-line-height: 60px;
+  --van-tabs-line-height: 16vw;
+  padding-bottom: 13.3333vw;
+
   .van-search {
     position: fixed;
     top: 0;
@@ -47,6 +49,5 @@ const value = ref('')
       width: 100%;
     }
   }
-  padding-bottom: 50px;
 }
 </style>
